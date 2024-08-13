@@ -41,6 +41,16 @@ public class ProductController {
 
 		return new ResponseEntity<ProductDTO>(savedProduct, HttpStatus.CREATED);
 	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping("/public/products/{productId}")
+	public ResponseEntity<ProductDTO> getProductsById(
+	        @PathVariable(name ="productId") Long productId) {
+	    
+	    ProductDTO productdto = productService.getProductById(productId);
+
+	    return new ResponseEntity<>(productdto, HttpStatus.OK);
+	}
 
 	
 	@CrossOrigin(origins = "http://localhost:3000/allproduct", allowedHeaders = "Authorization")

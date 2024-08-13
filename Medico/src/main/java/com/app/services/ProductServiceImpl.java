@@ -2,6 +2,7 @@ package com.app.services;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -92,6 +94,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public ProductDTO getProductById(Long id) {	
+		ProductDTO productdto = productRepo.findByProductId(id).orElseThrow();
+		return productdto;	
+	}
+	
+	@Override
 	public ProductResponse getAllProducts(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
 //		Determines the sort order based on the input parameters.
 //		Defines paging details.
@@ -106,7 +114,7 @@ public class ProductServiceImpl implements ProductService {
 		Page<Product> pageProducts = productRepo.findAll(pageDetails);
 
 		List<Product> products = pageProducts.getContent();
-
+		
 		List<ProductDTO> productDTOs = products.stream().map(product -> modelMapper.map(product, ProductDTO.class))
 				.collect(Collectors.toList());
 

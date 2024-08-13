@@ -17,6 +17,7 @@ public class AppConstants {
         "/api/register/**", 
         "/api/login", 
         "/api/public/products",
+        "/api/public/products/*",
         "/api/public/categories/*/products",
         "/api/public/products/keyword/**" 
     };
