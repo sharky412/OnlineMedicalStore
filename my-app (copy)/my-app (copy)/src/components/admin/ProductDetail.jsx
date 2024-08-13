@@ -6,17 +6,15 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import "../admin/ProductDetail.css";
 
-const ProductDetail = () => {
+const ProductDetail = ({ products }) => {
   const context = useContext(myContext);
-  const { loading, setLoading, getAllProduct, getAllProductFunction } = context;
+  const { loading, setLoading, getAllProductFunction } = context;
   const navigate = useNavigate();
 
-  // Delete function using Axios
   const deleteProduct = async (id) => {
     setLoading(true);
     try {
       const response = await axios.delete(`http://localhost:8080/products/${id}`);
-
       if (response.status === 200) {
         toast.success("Product deleted successfully");
         getAllProductFunction(); // Refresh product list after deletion
@@ -60,7 +58,7 @@ const ProductDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {getAllProduct.map((item, index) => {
+            {products.map((item, index) => {
               const { productId, productName, price, image } = item;
               return (
                 <tr key={productId}>
@@ -87,5 +85,6 @@ const ProductDetail = () => {
     </div>
   );
 };
+
 
 export default ProductDetail;

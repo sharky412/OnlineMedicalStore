@@ -11,23 +11,13 @@ const AdminDashboard = () => {
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
 
-  //getting information of admin
+  // Getting information of admin
   const userEmail = JSON.parse(localStorage.getItem("user"));
   const Role = JSON.parse(localStorage.getItem("role"));
   const firstName = JSON.parse(localStorage.getItem("firstName"));
   const lastName = JSON.parse(localStorage.getItem("lastName"));
 
   useEffect(() => {
-    // Fetch user data
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get("/api/user");
-        setUser(response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
     // Fetch all products
     const fetchProducts = async () => {
       try {
@@ -52,14 +42,19 @@ const AdminDashboard = () => {
     // Fetch all users
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("/api/users");
-        setUsers(response.data);
+        const token = JSON.parse(localStorage.getItem('token'));
+        const response = await axios.get('http://localhost:8080/api/admin/users', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const usersArray = response.data.content || [];
+        setUsers(usersArray);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
 
-    fetchUser();
     fetchProducts();
     fetchOrders();
     fetchUsers();

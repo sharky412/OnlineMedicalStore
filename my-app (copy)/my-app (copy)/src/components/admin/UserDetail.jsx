@@ -1,10 +1,7 @@
-import { useContext } from "react";
-import myContext from "../../context/myContext";
-import "../admin/UserDetail.css";
-const UserDetail = () => {
-  const context = useContext(myContext);
-  const { getAllUser } = context;
+import React from 'react';
+import '../admin/UserDetail.css';
 
+const UserDetail = ({ users }) => {
   return (
     <div className="container mt-5">
       {/* Heading Section */}
@@ -26,7 +23,7 @@ const UserDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {getAllUser.map((value, index) => (
+            {users.map((value, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{value.name}</td>
