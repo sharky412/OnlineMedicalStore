@@ -51,7 +51,7 @@ const handleDecrement = (productId) => {
   }, [cartItems]);
 
   // user
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userEmail = JSON.parse(localStorage.getItem("user"));
 
   // Buy Now Function
   const [addressInfo, setAddressInfo] = useState({
@@ -77,8 +77,8 @@ const handleDecrement = (productId) => {
     const orderInfo = {
       cartItems,
       addressInfo,
-      email: user.email,
-      userid: user.uid,
+      email: userEmail,
+      PaymentMethod: paymentMethodSelected,
       status: "confirmed",
       time: new Date().toISOString(),
       date: new Date().toLocaleDateString("en-US", {
@@ -89,7 +89,7 @@ const handleDecrement = (productId) => {
     };
 
     try {
-      await axios.post("https://your-api-endpoint.com/orders", orderInfo);
+      await axios.post("https://localhost:8080/api/users/order", orderInfo);
       dispatch(resetCart());
     localStorage.removeItem("cart");
       setAddressInfo({
@@ -164,7 +164,7 @@ const handleDecrement = (productId) => {
                   <dd className="col-sm-6">₹{cartTotal}</dd>
                 </dl>
                 <div className="d-flex justify-content-between">
-                  {user ? <BuyNowModal addressInfo={addressInfo} setAddressInfo={setAddressInfo} buyNowFunction={buyNowFunction} /> : <Navigate to="/login" />}
+                  {userEmail ? <BuyNowModal addressInfo={addressInfo} setAddressInfo={setAddressInfo} buyNowFunction={buyNowFunction} /> : <Navigate to="/login" />}
                 </div>
               </div>
             </div>

@@ -9,16 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.config.AppConstants;
+import com.app.payloads.ProductOrderRequest;
+import com.app.payloads.CartOrderRequest;
 import com.app.payloads.OrderDTO;
 import com.app.payloads.OrderResponse;
 import com.app.services.OrderService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -28,12 +32,22 @@ public class OrderController {
 	@Autowired
 	public OrderService orderService;
 	
-	@PostMapping("/public/users/{emailId}/carts/{cartId}/payments/{paymentMethod}/order")
-	public ResponseEntity<OrderDTO> orderProducts(@PathVariable String emailId, @PathVariable Long cartId, @PathVariable String paymentMethod) {
-		OrderDTO order = orderService.placeOrder(emailId, cartId, paymentMethod);
-		
-		return new ResponseEntity<OrderDTO>(order, HttpStatus.CREATED);
+	@PostMapping("/users/orders")
+	public ResponseEntity<OrderDTO> orderProducts(@Valid @RequestBody CartOrderRequest cartOrderRequest) {
+	    // Log or debug the received request
+	    System.out.println("Received CartOrderRequest: " + cartOrderRequest);
+
+	    OrderDTO order = orderService.placeOrder(
+	        cartOrderRequest.getEmail(),
+	        cartOrderRequest.getProducts(),
+	        cartOrderRequest.getPaymentMethod(),
+	        cartOrderRequest.getTotal()
+	    );
+	    
+	    return new ResponseEntity<>(order, HttpStatus.CREATED);
 	}
+
+
 
 	@GetMapping("/admin/orders")
 	public ResponseEntity<OrderResponse> getAllOrders(
