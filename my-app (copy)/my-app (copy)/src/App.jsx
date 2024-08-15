@@ -6,6 +6,7 @@ import { ProtectedRouteForUser } from "./protectedRoute/ProtectedRouteForUser";
 import { ProtectedRouteForAdmin } from "./protectedRoute/ProtectedRouteForAdmin";
 import ScrollTop from "./components/scrollTop/ScrollTop";
 
+
 // Lazy-loaded components
 const HomePage = lazy(() => import("./pages/home/HomePage"));
 const NoPage = lazy(() => import("./pages/noPage/NoPage"));
@@ -28,6 +29,7 @@ const App = () => {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/*" element={<NoPage />} />
             <Route path="/productinfo/:id" element={<ProductInfo />} />
             <Route path="/cart" element={<CartPage />} />
