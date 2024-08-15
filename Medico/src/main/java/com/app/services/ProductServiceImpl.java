@@ -86,10 +86,10 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-    @Override
-    public ProductDTO getProductById(Long id) {    
-        ProductDTO productdto = productRepo.findByProductId(id).orElseThrow();
-        return productdto;    
+    public ProductDTO getProductById(Long productId) {
+        Product product = productRepo.findById(productId)
+                          .orElseThrow(() -> new ResourceNotFoundException());
+        return modelMapper.map(product, ProductDTO.class);
     }
     
     @Override
