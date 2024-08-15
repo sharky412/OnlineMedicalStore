@@ -21,7 +21,7 @@ public class AppConstants {
         "/api/public/categories/*/products",
         "/api/public/products/keyword/**" 
     };
-	public static final String[] USER_URLS = { "/api/user/**" };
+	public static final String[] USER_URLS = { "/api/user/**", "/api/users/**" };
 	public static final String[] ADMIN_URLS = { "/api/admin/**" };
 
 }
