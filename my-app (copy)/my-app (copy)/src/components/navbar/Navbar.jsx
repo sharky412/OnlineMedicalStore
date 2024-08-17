@@ -127,24 +127,24 @@ const Navbar = () => {
   const navList = (
     <ul className="navbar-nav mx-auto mb-2 mb-lg-0 d-flex">
       <li className="nav-item">
-        <Link className="nav-link text-primary" to="/" aria-label="Home">
+        <Link className="nav-link " to="/" aria-label="Home"style={{ color: 'black' }}>
           Home
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link text-primary" to="/allproduct" aria-label="All Products">
+        <Link className="nav-link " to="/allproduct" aria-label="All Products"style={{ color: 'black' }}>
           All Product
         </Link>
       </li>
       {!role && (
         <>
           <li className="nav-item">
-            <Link className="nav-link text-primary" to="/signup" aria-label="Signup">
+            <Link className="nav-link " to="/signup" aria-label="Signup" style={{ color: 'black' }}>
               Signup
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-primary" to="/login" aria-label="Login">
+            <Link className="nav-link " to="/login" aria-label="Login" style={{ color: 'black' }}>
               Login
             </Link>
           </li>
@@ -152,27 +152,29 @@ const Navbar = () => {
       )}
       {role === "USER" && (
         <li className="nav-item">
-          <Link className="nav-link text-primary" to="/user-dashboard" aria-label="User Dashboard">
-            User
-          </Link>
+          
+          <Link className="nav-link" to="/user-dashboard" aria-label="User Dashboard" style={{ color: 'black' }}>
+  User
+</Link>
+
         </li>
       )}
       {role === "ADMIN" && (
         <li className="nav-item">
-          <Link className="nav-link text-primary" to="/admin-dashboard" aria-label="Admin Dashboard">
+          <Link className="nav-link " to="/admin-dashboard" aria-label="Admin Dashboard"style={{ color: 'black' }}>
             Admin
           </Link>
         </li>
       )}
       {role && (
         <li className="nav-item">
-          <button className="nav-link btn btn-link text-primary" onClick={logout} aria-label="Logout">
+          <button className="nav-link btn btn-link " onClick={logout} aria-label="Logout"style={{ color: 'black' }}>
             Logout
           </button>
         </li>
       )}
       <li className="nav-item">
-        <Link className="nav-link text-primary" to="/cart" aria-label="Cart">
+        <Link className="nav-link " to="/cart" aria-label="Cart"style={{ color: 'black' }}>
           Cart({cartItems.length})
         </Link>
       </li>
@@ -180,10 +182,10 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-warning sticky-top">
+    <nav className="navbar navbar-expand-lg navbar-light  sticky-top" style={{backgroundColor:"#88D8C0"}}>
       <div className="container-fluid" style={{ paddingLeft: '10%', paddingRight: '10%' }}>
         <Link className="navbar-brand d-flex align-items-center" to="/">
-          <h2 className="text-white mb-0">Medico</h2>
+          <h2 className=" mb-0"style={{ color: 'black' }}>Medico</h2>
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

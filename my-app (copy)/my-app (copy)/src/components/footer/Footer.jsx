@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-warning text-white">
+    <footer className=" text-white" style={{backgroundColor:"Black"}}>
       <div className="container py-4">
         <div className="d-flex flex-column flex-md-row align-items-center justify-content-between">
           {/* Logo */}

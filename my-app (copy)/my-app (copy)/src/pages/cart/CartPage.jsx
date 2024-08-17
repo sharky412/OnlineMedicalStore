@@ -315,7 +315,7 @@ const handleDecrement = (productId) => {
           <div className="col-md-8">
             <div className="card">
               <div className="card-body">
-                <h2 className="card-title">Items in your shopping cart</h2>
+               
                 {cartItems.length > 0 ? (
                   cartItems.map((item) => {
                     const { productId, productName, price, image, quantity, category } = item;
@@ -344,7 +344,7 @@ const handleDecrement = (productId) => {
                     );
                   })
                 ) : (
-                  <p className="text-center">No items in the cart</p>
+                  <p className="text-center"style={{textAlign:"center", fontWeight: "bold",fontSize:25}}>No items in the cart</p>
                 )}
               </div>
             </div>
