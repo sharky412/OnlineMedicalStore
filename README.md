@@ -59,10 +59,16 @@ A full-stack online medical store: customers browse and order healthcare product
 ### Backend (`Medico/`)
 
 Database settings are read from environment variables (with local defaults) in `Medico/src/main/resources/application.properties`:
-`DB_HOST`, `DB_PORT`, `DB_NAME` (default `ecommerceappdb`), `DB_USERNAME`, `DB_PASSWORD`.
+`DB_HOST`, `DB_PORT`, `DB_NAME` (default `ecommerceappdb`), `DB_USERNAME`.
+
+Two secrets have no default and must be set before the app will start:
+`DB_PASSWORD` (MySQL password) and `JWT_SECRET` (key used to sign login tokens; generate one with `openssl rand -base64 48`).
+See [`Medico/.env.example`](Medico/.env.example).
 
 ```bash
 cd Medico
+cp .env.example .env   # then fill in DB_PASSWORD and JWT_SECRET
+set -a; source .env; set +a
 ./mvnw spring-boot:run
 ```
 
