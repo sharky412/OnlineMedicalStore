@@ -9,6 +9,7 @@ A full-stack online medical store: customers browse and order healthcare product
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
 ![Redux](https://img.shields.io/badge/Redux%20Toolkit-2-764ABC?logo=redux&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Screenshots
 
@@ -92,3 +93,7 @@ Medico/                      Spring Boot backend
 my-app (copy)/my-app (copy)/ React frontend
 Photos/                      screenshots
 ```
+
+## License
+
+Released under the [MIT License](LICENSE).
