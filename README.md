@@ -47,14 +47,14 @@ A full-stack online medical store: customers browse and order healthcare product
 |----------|--------------|
 | Backend  | Java 17, Spring Boot 3.0, Spring Web, Spring Data JPA (Hibernate), Spring Security, java-jwt, ModelMapper, Lombok, springdoc-openapi |
 | Database | MySQL |
-| Frontend | React 18 (Create React App), React Router 6, Redux Toolkit, Axios, Bootstrap 5 / React-Bootstrap, react-hot-toast |
+| Frontend | React 18 (Vite), React Router 7, Redux Toolkit, Axios, Bootstrap 5 / React-Bootstrap, react-hot-toast |
 
 ## Getting started
 
 ### Prerequisites
 - JDK 17
 - MySQL running locally
-- Node.js and npm
+- Node.js 20.19+ or 22.12+ (required by Vite) and npm or Yarn
 
 ### Backend (`Medico/`)
 
@@ -79,8 +79,12 @@ The API starts on `http://localhost:8080`; Swagger UI is at `http://localhost:80
 ```bash
 cd "my-app (copy)/my-app (copy)"
 npm install
-npm start          # http://localhost:3000
+npm run dev        # Vite dev server on http://localhost:3000 (`npm start` does the same)
+npm run build      # production build into build/
+npm run preview    # serve the production build locally
 ```
+
+The frontend calls the API at `http://localhost:8080`.
 
 Sample category/product data is in `Products.sql` in the frontend folder.
 
