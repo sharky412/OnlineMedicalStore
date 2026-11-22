@@ -39,21 +39,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf()
-            .disable()
-            .cors().configurationSource(corsConfigurationSource()) // Enable CORS
-            .and()
-            .authorizeHttpRequests()
-            .requestMatchers(AppConstants.PUBLIC_URLS).permitAll()
-            .requestMatchers(AppConstants.USER_URLS).hasAnyAuthority("USER", "ADMIN")
-            .requestMatchers(AppConstants.ADMIN_URLS).hasAuthority("ADMIN")
-            .anyRequest()
-            .authenticated()
-            .and()
-            .exceptionHandling().authenticationEntryPoint(
-                    (request, response, authException) -> 
-                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized"))
-            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);   
+            .csrf(csrf -> csrf.disable())
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(AppConstants.PUBLIC_URLS).permitAll()
+                .requestMatchers(AppConstants.USER_URLS).hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers(AppConstants.ADMIN_URLS).hasAuthority("ADMIN")
+                .anyRequest().authenticated())
+            .exceptionHandling(ex -> ex.authenticationEntryPoint(
+                    (request, response, authException) ->
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         http.authenticationProvider(daoAuthenticationProvider());
@@ -63,8 +59,7 @@ public class SecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsServiceImpl);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsServiceImpl);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }

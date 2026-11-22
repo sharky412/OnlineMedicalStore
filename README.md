@@ -45,7 +45,7 @@ A full-stack online medical store: customers browse and order healthcare product
 
 | Layer    | Technologies |
 |----------|--------------|
-| Backend  | Java 17, Spring Boot 3.0, Spring Web, Spring Data JPA (Hibernate), Spring Security, java-jwt, ModelMapper, Lombok, springdoc-openapi |
+| Backend  | Java 17, Spring Boot 3.5, Spring Web, Spring Data JPA (Hibernate), Spring Security, java-jwt, ModelMapper, Lombok, springdoc-openapi |
 | Database | MySQL |
 | Frontend | React 18 (Vite), React Router 7, Redux Toolkit, Axios, Bootstrap 5 / React-Bootstrap, react-hot-toast |
 
